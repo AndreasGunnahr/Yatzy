@@ -12,12 +12,10 @@ let diceValue = 0;
 let playerIndex = 1;
 
 // TODO: Kolla om man kan lösa så man kan ha samma av flera namn. Problem när man tar bort ena (index).
-// TODO: Fixa summan till alla andra spelare. 
 // TODO: Fixa så man inte kan lägga till någon annans spelares värde på någon annans spelplan. 
-// TODO: Fixa sista värdena på tabellen. 
 // TODO: Fixa Hide/show av tärningarna. 
 
-// TODO: Par verkar ej funka.
+// TODO: Yatzy get NaN om man sätter 0. 
 
 
 function addPlayerNames(){
@@ -107,11 +105,11 @@ function checkCombination(cell_id,number){
     let checkCounter = 0;
     let stash = 0;
     let kStash = 0;
+    let kCheck = 0;
     let kSum = 0;
     let twoPair = 0; 
     for(let x = 0; x <= diceValuesArray.length; x++){
         let contain = countInArray(diceValuesArray,numbers[x]);
-
         // Kontroll av Triss 
         if(contain >= 3 && cell_id.includes("_triss")){
             document.getElementById(cell_id).innerHTML = numbers[x]*3
@@ -139,6 +137,13 @@ function checkCombination(cell_id,number){
                 }
             }
         }
+        // Kontroll av Yatzy
+        else if(contain == 5 && cell_id.includes("_yatzy")){
+            document.getElementById(cell_id).innerHTML = number;
+            document.getElementById(cell_id).value = number;
+            document.getElementById(cell_id).disabled = true; 
+            return true;
+        }
         // Kontroll av stor stege (2-6).
         else if(contain == 1 && cell_id.includes("_ss")){
             if(diceValuesArray.includes(ss[x])){
@@ -151,26 +156,13 @@ function checkCombination(cell_id,number){
                 }
             }
         }
-        // Kontroll av 2 par. 
-        else if(stash == 2 && cell_id.includes("_2pair")){
-            document.getElementById(cell_id).innerHTML = twoPair;
-            document.getElementById(cell_id).value = twoPair;
-            document.getElementById(cell_id).disabled = true; 
-            return true;
-        }
-        // Kontroll av Yatzy
-        else if(contain == 5){
-            document.getElementById(cell_id).innerHTML = number;
-            document.getElementById(cell_id).value = number;
-            document.getElementById(cell_id).disabled = true; 
-            return true;
-        }
-        //Kontroll av par
+        //Kontroll av 1 par
         else if(contain >= 2 && !cell_id.includes("_pair")){
             twoPair += numbers[x]*2;
             stash += 1;
             if(contain == 3){
                 kStash += 1;
+                kCheck = 1;
                 kSum += numbers[x]*3;
             }
             else if(contain == 2){
@@ -178,14 +170,21 @@ function checkCombination(cell_id,number){
                 kSum += numbers[x]*2; 
             }    
         }
+        // Kontroll av 2 par. 
+        else if(stash == 2 && cell_id.includes("_2pair")){
+            document.getElementById(cell_id).innerHTML = twoPair;
+            document.getElementById(cell_id).value = twoPair;
+            document.getElementById(cell_id).disabled = true; 
+            return true;
+        }
         // Kontroll av kåk. 
-        else if(kStash == 2 && cell_id.includes("_kak")){
+        else if(kStash == 2 && kCheck == 1 && cell_id.includes("_kak")){
             document.getElementById(cell_id).innerHTML = kSum;
             document.getElementById(cell_id).value = kSum;
             document.getElementById(cell_id).disabled = true; 
             return true;
         }
-        // Kontroll av insättning av 1-6 och 1 par. 
+        // Kontroll av insättning av 1-6.
         else if(contain >= number){
             document.getElementById(cell_id).innerHTML = numbers[x]*number;
             document.getElementById(cell_id).value = numbers[x]*number;
@@ -205,9 +204,8 @@ function addValue(cell_id){
     let added = false;
     let oneSum = 0; let twoSum = 0;
     let diceSum_1 = 0; let diceSum_2 = 0; let diceSum_3 = 0; let diceSum_4 = 0; let diceSum_5 = 0; let = diceSum_6 = 0;
-    // let diceSumArray = [diceSum_1,diceSum_2,diceSum_3,diceSum_4,diceSum_5,diceSum_6];
+    
     for(let y = 0; y < 5; y ++){
-        
         diceValue = parseInt(document.getElementById(diceArray[y]).value,10);
         if(diceValue == 1){
             diceSum_1 += diceValue;
@@ -305,9 +303,10 @@ function addValue(cell_id){
         console.log(alert("Pick a empty board cell."));
     }
 
+    let sumTotal = 0;
+    let valueCheck = 0;
     let playerString = "";
     let playerCell = "";
-    let sumTotal = 0;
     let sumIndex = ""; 
     let sumArray = ["_1","_2","_3","_4","_5","_6","_bonus","_pair","_2pair","_triss","_fyrtal","_kak","_ls","_ss", "_chance","_yatzy"];
 
@@ -325,7 +324,27 @@ function addValue(cell_id){
         if(document.getElementById(playerString).value != undefined && document.getElementById(playerString).value != ""){
             oneSum +=  document.getElementById(playerString).value;
             document.getElementById(sumIndex).innerHTML = oneSum;
+            valueCheck += 1;
         }
+        else if(document.getElementById(playerString).value == 0){
+            valueCheck += 1;
+        }
+    }
+    
+    for(let x = 0; x < playerArray.length; x++){
+        let checkCell = cell_id.includes(tableSpots[x]);  
+        if(checkCell){
+            playerCell = tableSpots[x];
+            sumIndex = playerCell.concat("_bonus");
+            if(oneSum >= 63 && valueCheck == 6){
+                document.getElementById(sumIndex).innerHTML = 50;
+                document.getElementById(sumIndex).value = 50; 
+            }
+            else if(oneSum < 63 && valueCheck == 6){
+                document.getElementById(sumIndex).innerHTML = 0;
+                document.getElementById(sumIndex).value = 0;
+            }
+        }  
     }
 
     for(let x = 0; x < 16; x++){
@@ -335,16 +354,27 @@ function addValue(cell_id){
         if(document.getElementById(playerString).value != undefined && document.getElementById(playerString).value != ""){
             sumTotal += 1;
             twoSum +=  document.getElementById(playerString).value;
-            if(sumTotal == 15){
-                document.getElementById(sumIndex).innerHTML = twoSum;
-            }
+        }
+        else if(document.getElementById(playerString).value == 0){
+            sumTotal += 1;
         }
     }
-  
-    if(oneSum >= 63){
-        document.getElementById("playerOne_bonus").innerHTML = 50;
-        document.getElementById("playerOne_bonus").value = 50; 
+
+    playerCell = "";
+    sumIndex = ""; 
+    for(let x = 0; x < playerArray.length; x++){
+        let checkCell = cell_id.includes(tableSpots[x]);  
+        if(checkCell){
+            playerCell = tableSpots[x];
+            sumIndex = playerCell.concat("_sum2");
+        }  
     }
+
+    if(sumTotal == 16){
+        document.getElementById(sumIndex).innerHTML = twoSum;
+    }
+    
+
 
     if(added){
         let playerMaxIndex = playerArray.length;
@@ -352,7 +382,6 @@ function addValue(cell_id){
             playerMaxIndex -= 1;
             
         }
-        // console.log(playerMaxIndex);
         numberOfThrows = 0;
         for(let x = 0; x < 5; x ++){
             document.getElementById(diceArray[x]).style.backgroundColor = "green";
@@ -387,14 +416,13 @@ function startGame(){
     document.getElementById("start").disabled = true;
     document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[0];
 
-    // for(let x = 0; x < 5; x ++){
-        // if(numberOfThrows != 3 && document.getElementById(diceArray[x]).style.backgroundColor != "grey"){
-            document.getElementById(diceArray[0]).value = 2;
-            document.getElementById(diceArray[1]).value = 4;
-            document.getElementById(diceArray[2]).value = 3;
-            document.getElementById(diceArray[3]).value = 6;
-            document.getElementById(diceArray[4]).value = 5;
-        // }
+    
+    document.getElementById(diceArray[0]).value = 6;
+    document.getElementById(diceArray[1]).value = 6;
+    document.getElementById(diceArray[2]).value = 6;
+    document.getElementById(diceArray[3]).value = 6;
+    document.getElementById(diceArray[4]).value = 6;
+       
 
 }
 
