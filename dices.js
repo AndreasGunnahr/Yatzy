@@ -9,15 +9,16 @@ let numbers = [6,5,4,3,2,1];
 let counter = 0;
 let numberOfThrows = 0; 
 let diceValue = 0; 
-let playerIndex = 1;
+let playerIndex = 0;
+let totalSum = 0;
+let startIndex = 0;
+let stash = 0;
 
 // TODO: Kolla om man kan lösa så man kan ha samma av flera namn. Problem när man tar bort ena (index).
-// TODO: Fixa så man inte kan lägga till någon annans spelares värde på någon annans spelplan. 
 // TODO: Fixa Hide/show av tärningarna. 
 
-// TODO: Yatzy get NaN om man sätter 0. 
 
-
+// Funktion där vi lägger till varje spelares namn i tabellen. 
 function addPlayerNames(){
     let playerNameLower = document.getElementById("playerNames").value.toLowerCase();
     let playerName = playerNameLower.charAt(0).toUpperCase() + playerNameLower.slice(1);
@@ -39,6 +40,7 @@ function addPlayerNames(){
     }
 }
 
+// Funktion där vi tar bort en spelares namn från tabellen. 
 function removePlayerNames(){
     let playerNameLower = document.getElementById("playerNames").value.toLowerCase();
     let playerName = playerNameLower.charAt(0).toUpperCase() + playerNameLower.slice(1);
@@ -64,6 +66,7 @@ function removePlayerNames(){
     }
 }
 
+// Funktion som gör att vi kan spara värdena på tärningarna om vi klickar på dem.
 function saveDiceValue(clicked){
     let diceValue = document.getElementById(clicked).value;
     if(diceValue != "" &&  document.getElementById(clicked).style.backgroundColor != "grey"){
@@ -74,7 +77,8 @@ function saveDiceValue(clicked){
     }
 }
 
-function calc(){
+// Funktion där vi kollar om max antal kast är gjorda. 
+function checkMaxThrow(){
     if(numberOfThrows < 3){
         numberOfThrows += 1;
         document.getElementById("nrThrows").innerHTML = "You have made: " + numberOfThrows + " " + "throw";
@@ -101,13 +105,14 @@ function countInArray(array, value) {
     return count;
 }
 
+// Funktion som kollar kombinationerna av värdena. 
 function checkCombination(cell_id,number){
     let checkCounter = 0;
-    let stash = 0;
     let kStash = 0;
     let kCheck = 0;
     let kSum = 0;
     let twoPair = 0; 
+
     for(let x = 0; x <= diceValuesArray.length; x++){
         let contain = countInArray(diceValuesArray,numbers[x]);
         // Kontroll av Triss 
@@ -156,6 +161,23 @@ function checkCombination(cell_id,number){
                 }
             }
         }
+        // Kontroll av chance.
+        else if(cell_id.includes("_chance")){
+            if(isNaN(totalSum) ){
+                totalSum = 0;
+            }
+            document.getElementById(cell_id).innerHTML = totalSum;
+            document.getElementById(cell_id).value = totalSum;
+            document.getElementById(cell_id).disabled = true; 
+            return true;
+        }
+         // Kontroll av 2 par. 
+         else if(stash == 2 && cell_id.includes("_twoPair")){
+            document.getElementById(cell_id).innerHTML = twoPair;
+            document.getElementById(cell_id).value = twoPair;
+            document.getElementById(cell_id).disabled = true; 
+            return true;
+        }
         //Kontroll av 1 par
         else if(contain >= 2 && !cell_id.includes("_pair")){
             twoPair += numbers[x]*2;
@@ -169,13 +191,6 @@ function checkCombination(cell_id,number){
                 kStash += 1;
                 kSum += numbers[x]*2; 
             }    
-        }
-        // Kontroll av 2 par. 
-        else if(stash == 2 && cell_id.includes("_2pair")){
-            document.getElementById(cell_id).innerHTML = twoPair;
-            document.getElementById(cell_id).value = twoPair;
-            document.getElementById(cell_id).disabled = true; 
-            return true;
         }
         // Kontroll av kåk. 
         else if(kStash == 2 && kCheck == 1 && cell_id.includes("_kak")){
@@ -198,13 +213,12 @@ function checkCombination(cell_id,number){
     return true;
 }
 
- // Uträkning av varje tärning (1-6) 
+ // Uträkning av varje tärning (1-6) och där vi sätter in värdena i tabellen. 
 function addValue(cell_id){
-    let totalSum = 0;
     let added = false;
     let oneSum = 0; let twoSum = 0;
     let diceSum_1 = 0; let diceSum_2 = 0; let diceSum_3 = 0; let diceSum_4 = 0; let diceSum_5 = 0; let = diceSum_6 = 0;
-    
+    totalSum = 0;
     for(let y = 0; y < 5; y ++){
         diceValue = parseInt(document.getElementById(diceArray[y]).value,10);
         if(diceValue == 1){
@@ -228,90 +242,90 @@ function addValue(cell_id){
          totalSum += diceValue;
     }
 
-    for(let x = 0; x < diceArray.length; x++){
-        //lagt en sträng här. 
+    for(let x = 0; x < diceArray.length; x++){ 
         diceValuesArray[x] = "" + document.getElementById(diceArray[x]).value;
     }
 
-    if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_1" || cell_id == "playerTwo_1"){
+
+    if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex] + "_1") ){
         document.getElementById(cell_id).innerHTML = diceSum_1;
         document.getElementById(cell_id).value = diceSum_1;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     } 
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_2" || cell_id == "playerTwo_2"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_2")){  
         document.getElementById(cell_id).innerHTML = diceSum_2;
         document.getElementById(cell_id).value = diceSum_2;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_3" || cell_id == "playerTwo_3"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_3")){
         document.getElementById(cell_id).innerHTML = diceSum_3;
         document.getElementById(cell_id).value = diceSum_3;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_4" || cell_id == "playerTwo_4"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_4")){
         document.getElementById(cell_id).innerHTML = diceSum_4;
         document.getElementById(cell_id).value = diceSum_4;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_5" || cell_id == "playerTwo_5"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_5")){
         document.getElementById(cell_id).innerHTML = diceSum_5;
         document.getElementById(cell_id).value = diceSum_5;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_6" || cell_id == "playerTwo_6"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_6")){
         document.getElementById(cell_id).innerHTML = diceSum_6;
         document.getElementById(cell_id).value = diceSum_6;
         document.getElementById(cell_id).disabled = true; 
         added = true;
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_pair" || cell_id == "playerTwo_pair"){
-      added = checkCombination(cell_id,2);
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_pair")){
+    added = checkCombination(cell_id,2);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_2pair" || cell_id == "playerTwo_2pair"){
-      added = checkCombination(cell_id,100);
+    else if(document.getElementById(cell_id).value == undefined &&cell_id.includes(tableSpots[startIndex]  + "_twoPair")){
+    added = checkCombination(cell_id,100);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_triss" || cell_id == "playerTwo_triss"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_triss")){
         added = checkCombination(cell_id,3);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_fyrtal" || cell_id == "playerTwo_fyrtal"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_fyrtal")){
         added = checkCombination(cell_id,4);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_kak" || cell_id == "playerTwo_kak"){
-      added = checkCombination(cell_id,100);
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_kak")){
+        added = checkCombination(cell_id,100);
     }
-    else if( document.getElementById(cell_id).value == undefined && cell_id == "playerOne_ls" || cell_id == "playerTwo_ls"){
+    else if( document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_ls")){
         added = checkCombination(cell_id,15);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_ss" || cell_id == "playerTwo_ss"){
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_ss")){
         added = checkCombination(cell_id,20);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_chance" || cell_id == "playerTwo_chance"){
-        document.getElementById(cell_id).innerHTML = totalSum;
-        document.getElementById(cell_id).value = totalSum;
-        document.getElementById(cell_id).disabled = true; 
-        added = true;
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_chance")){
+        added = checkCombination(cell_id,100);
     }
-    else if(document.getElementById(cell_id).value == undefined && cell_id == "playerOne_yatzy" || cell_id == "playerTwo_yatzy"){
-       added = checkCombination(cell_id,50);
+    else if(document.getElementById(cell_id).value == undefined && cell_id.includes(tableSpots[startIndex]  + "_yatzy")){
+        added = checkCombination(cell_id,50);
     }
-    else{
-        console.log(alert("Pick a empty board cell."));
+    else{  
+        console.log(alert("Pick a empty board cell or your own column."));
+        added = false;
     }
+
+
 
     let sumTotal = 0;
     let valueCheck = 0;
     let playerString = "";
     let playerCell = "";
     let sumIndex = ""; 
-    let sumArray = ["_1","_2","_3","_4","_5","_6","_bonus","_pair","_2pair","_triss","_fyrtal","_kak","_ls","_ss", "_chance","_yatzy"];
+    let sumArray = ["_1","_2","_3","_4","_5","_6","_bonus","_pair","_twoPair","_triss","_fyrtal","_kak","_ls","_ss", "_chance","_yatzy"];
 
     for(let x = 0; x < playerArray.length; x++){
-        let checkCell = cell_id.includes(tableSpots[x]);  
+        let checkCell = cell_id.includes(tableSpots[x]); 
         if(checkCell){
             playerCell = tableSpots[x];
             sumIndex = playerCell.concat("_sum1");
@@ -329,6 +343,7 @@ function addValue(cell_id){
         else if(document.getElementById(playerString).value == 0){
             valueCheck += 1;
         }
+
     }
     
     for(let x = 0; x < playerArray.length; x++){
@@ -380,7 +395,6 @@ function addValue(cell_id){
         let playerMaxIndex = playerArray.length;
         if(playerMaxIndex > 1){
             playerMaxIndex -= 1;
-            
         }
         numberOfThrows = 0;
         for(let x = 0; x < 5; x ++){
@@ -388,25 +402,29 @@ function addValue(cell_id){
             document.getElementById(diceArray[x]).value = "X";
             document.getElementById(diceArray[x]).removeAttribute('disabled');
         }
-        if(playerArray[playerIndex] == undefined){
+
+        if(playerArray[playerIndex+1] == undefined){
             playerIndex = 0;
-            document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
-            document.getElementById("nrThrows").innerHTML = "You have made: ";
-        }
-        else if(playerIndex == playerMaxIndex){
-            document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
-            document.getElementById("nrThrows").innerHTML = "You have made: ";
-            playerIndex = 0;
-        }
-        else if(playerIndex != playerMaxIndex){
+            startIndex = 0;
             document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
             document.getElementById("nrThrows").innerHTML = "You have made: 0 throw";
-            playerIndex += 1;
         }
-            
+        else if(playerIndex != playerMaxIndex){
+            playerIndex += 1;
+            startIndex += 1;
+            document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
+            document.getElementById("nrThrows").innerHTML = "You have made: 0 throw";
+        }
+        else if(playerIndex == playerMaxIndex){
+            playerIndex += 1;
+            startIndex += 1;
+            document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
+            document.getElementById("nrThrows").innerHTML = "You have made: 0 throw";
+        }  
     }   
 }
 
+// Funktion där vi startar matchen.
 function startGame(){
     document.getElementById("addPlayer").style.backgroundColor = "grey";
     document.getElementById("addPlayer").disabled = true;
@@ -414,18 +432,10 @@ function startGame(){
     document.getElementById("removePlayer").disabled = true;
     document.getElementById("start").style.backgroundColor = "grey";
     document.getElementById("start").disabled = true;
-    document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[0];
-
-    
-    document.getElementById(diceArray[0]).value = 6;
-    document.getElementById(diceArray[1]).value = 6;
-    document.getElementById(diceArray[2]).value = 6;
-    document.getElementById(diceArray[3]).value = 6;
-    document.getElementById(diceArray[4]).value = 6;
-       
-
+    document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
 }
 
+// Funktion där vi avslutar och börjar om matchen. 
 function endGame(){
     location.reload();
 }
