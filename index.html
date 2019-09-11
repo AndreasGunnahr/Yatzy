@@ -5,202 +5,253 @@
         <title>Yatzy</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
-        <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div class = "row">
-            <div class = "table-container">
-                <table>
-                    <caption>YATZY</caption>
-                    <tr>
-                    <th>SPELARE: </th>
-                    <td id = "playerOne"></th> 
-                    <td id = "playerTwo"></th>
-                    <td id = "playerThree"></th>
-                    <td id = "playerFour"></th>
-                    <td>Högsta poäng</td>
-                    </tr>
-                    <tr>
-                        <td>Ettor</td>
-                        <td id = "playerOne_1" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_1" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_1" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_1" onclick = "addValue(this.id)"></td>
-                        <td>1 x 5 = 5p</td>
-                    </tr>
-                    <tr>
-                        <td>Tvåor</td> 
-                        <td id = "playerOne_2" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_2" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_2" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_2" onclick = "addValue(this.id)"></td>
-                        <td>2 x 5 = 10p</td>
-                    </tr>
-                    <tr>
-                        <td>Treor</td> 
-                        <td id = "playerOne_3" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_3" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_3" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_3" onclick = "addValue(this.id)"></td>
-                        <td>3 x 5 = 15p</td>
-                    </tr>
-                    <tr>
-                        <td>Fyror</td> 
-                        <td id = "playerOne_4" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_4" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_4" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_4" onclick = "addValue(this.id)"></td>
-                        <td>4 x 5 = 20p</td>
-                    </tr>
-                    <tr>
-                        <td>Femmor</td> 
-                        <td id = "playerOne_5" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_5" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_5" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_5" onclick = "addValue(this.id)"></td>
-                        <td>5 x 5 = 25p</td>
-                    </tr>
-                    <tr>
-                        <td>Sexor</td> 
-                        <td id = "playerOne_6" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_6" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_6" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_6" onclick = "addValue(this.id)"></td>
-                        <td>6 x 5 = 30p</td>
-                    </tr>
-                    <tr>
-                        <th>SUMMA: </th> 
-                        <td id = "playerOne_sum1"></td> 
-                        <td id = "playerTwo_sum1"></td>
-                        <td id = "playerThree_sum1"></td>
-                        <td id = "playerFour_sum1"></td>
-                        <td>105 poäng är max </td>
-                    </tr>
-                    <tr>
-                        <td>BONUS (50)</td> 
-                        <td id = "playerOne_bonus"></td> 
-                        <td id = "playerTwo_bonus"></td>
-                        <td id = "playerThree_bonus"></td>
-                        <td id = "playerFour_bonus"></td>
-                        <td>Över 63p = 50 bonus</td>
-                    </tr>
-                    <tr>
-                        <td>Par</td> 
-                        <td id = "playerOne_pair" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_pair" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_pair" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_pair" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 = 12p</td>
-                    </tr>
-                    <tr>
-                        <td>Två par</td> 
-                        <td id = "playerOne_twoPair" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_twoPair" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_twoPair" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_twoPair" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 + 5 + 5 = 22p</td>
-                    </tr>
-                    <tr>
-                        <td>Triss</td> 
-                        <td id = "playerOne_triss"onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_triss" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_triss" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_triss" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 + 6 = 18p</td>
-                    </tr>
-                    <tr>
-                        <td>Fyrtal</td> 
-                        <td id = "playerOne_fyrtal" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_fyrtal" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_fyrtal" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_fyrtal" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 + 6 + 6 = 24p</td>
-                    </tr>
-                    <tr>
-                        <td>Kåk</td> 
-                        <td id = "playerOne_kak" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_kak" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_kak" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_kak" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 + 6 + 5 + 5 = 28p</td>
-                    </tr>
-                    <tr>
-                        <td>Liten stege</td> 
-                        <td id = "playerOne_ls"onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_ls" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_ls" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_ls" onclick = "addValue(this.id)"></td>
-                        <td>1,2,3,4,5 = 15p</td>
-                    </tr>
-                    <tr>
-                        <td>Stor stege</td> 
-                        <td id = "playerOne_ss" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_ss" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_ss" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_ss" onclick = "addValue(this.id)"></td>
-                        <td>2,3,4,5,6 = 30p</td>
-                    </tr>
-                    <tr>
-                        <td>Chans</td> 
-                        <td id = "playerOne_chance" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_chance" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_chance" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_chance" onclick = "addValue(this.id)"></td>
-                        <td>6 + 6 + 6 + 6 + 6 = 30p</td>
-                    </tr>
-                    <tr>
-                        <td>Yatzy (50)</td> 
-                        <td id = "playerOne_yatzy" onclick = "addValue(this.id)"></td> 
-                        <td id = "playerTwo_yatzy" onclick = "addValue(this.id)"></td>
-                        <td id = "playerThree_yatzy" onclick = "addValue(this.id)"></td>
-                        <td id = "playerFour_yatzy" onclick = "addValue(this.id)"></td>
-                        <td>x + x + x + x + x = 50p</td>
-                    </tr>
-                    <tr>
-                        <th>SUMMA:</th>
-                        <td id = "playerOne_sum2"></td> 
-                        <td id = "playerTwo_sum2"></td>
-                        <td id = "playerThree_sum2"></td>
-                        <td id = "playerThree_sum2"></td>
-                        <td>374p är max</td2>
-                    </tr>
-                </table>
-            </div>
-            <div class="form-container">
-                <form>
-                    <label for="playerNames">Player names</label>
-                    <input type="text" id="playerNames" placeholder="Please enter each players name.">
-                    <button id = "addPlayer" type="button" onclick = "addPlayerNames()">Add player</button>
-                    <button id = "removePlayer" type="button" onclick = "removePlayerNames()">Remove player</button>
-                    <button id = "start" type = "button" onclick = "startGame()">Start game</button>
-                    <button id = "end" type = "button" onclick = "endGame()">End game</button>
-                    
-                    <div class = "header-container">
-                        <h1 id = "playersTurn" class = "playerTurn">Current player: </h1>
-                        <h1 id = "nrThrows" class = "userThrow">You have made: 0 throw </h1>
-                        <div class = "label-container">
-                            <label class = "labelDices" for="diceOne">Dice 1</label>
-                            <label class = "labelDices" for="diceTwo">Dice 2</label>
-                            <label class = "labelDices" for="diceThree">Dice 3</label>
-                            <label class = "labelDices" for="diceFour">Dice 4</label>
-                            <label class = "labelDices" for="diceFive">Dice 5</label>
-                        </div>
-                        <div class = "dice-container">
-                            <input id = "diceOne" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
-                            <input id = "diceTwo" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
-                            <input id = "diceThree" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
-                            <input id = "diceFour" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
-                            <input id = "diceFive" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
-                        </div>
-                        <div class = "calc-container">
-                            <button id = "throw" type = "button" onclick = "checkMaxThrow()">Throw</button>
-                            <!-- <button id = "save" type = "button">Save values</button> -->
-                        </div>
+        <header class="header">
+            <h1 class="logo"><a href="#">IMAGE</a></h1>
+            <h1 class="yatzy">Yatzy</h1>
+            <ul class="main-nav">
+                <div class = "hero-image">
+                    <li>
+                        <img src="avatar.png" alt="Avatar" class="avatar">
+                        <h1>Welcome, Andreas</h1>
+                    </li>
+                </div>
+            </ul>
+        </header> 
+        <div class="page-wrapper">
+            <div class = "row">
+                <div class = "column">
+                    <div class = "table-container">
+                        <table id = "gameBoard">
+                            <tr>
+                            <th>SPELARE: </th>
+                            <td id = "playerOne"></th> 
+                            <td id = "playerTwo"></th>
+                            <td id = "playerThree"></th>
+                            <td id = "playerFour"></th>
+                            <td>Högsta poäng</td>
+                            </tr>
+                            <tr>
+                                <td>Ettor</td>
+                                <td id = "playerOne_1" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_1" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_1" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_1" onclick = "addValue(this.id)"></td>
+                                <td>1 x 5 = 5p</td>
+                            </tr>
+                            <tr>
+                                <td>Tvåor</td> 
+                                <td id = "playerOne_2" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_2" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_2" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_2" onclick = "addValue(this.id)"></td>
+                                <td>2 x 5 = 10p</td>
+                            </tr>
+                            <tr>
+                                <td>Treor</td> 
+                                <td id = "playerOne_3" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_3" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_3" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_3" onclick = "addValue(this.id)"></td>
+                                <td>3 x 5 = 15p</td>
+                            </tr>
+                            <tr>
+                                <td>Fyror</td> 
+                                <td id = "playerOne_4" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_4" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_4" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_4" onclick = "addValue(this.id)"></td>
+                                <td>4 x 5 = 20p</td>
+                            </tr>
+                            <tr>
+                                <td>Femmor</td> 
+                                <td id = "playerOne_5" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_5" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_5" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_5" onclick = "addValue(this.id)"></td>
+                                <td>5 x 5 = 25p</td>
+                            </tr>
+                            <tr>
+                                <td>Sexor</td> 
+                                <td id = "playerOne_6" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_6" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_6" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_6" onclick = "addValue(this.id)"></td>
+                                <td>6 x 5 = 30p</td>
+                            </tr>
+                            <tr>
+                                <th>SUMMA: </th> 
+                                <td id = "playerOne_sum1"></td> 
+                                <td id = "playerTwo_sum1"></td>
+                                <td id = "playerThree_sum1"></td>
+                                <td id = "playerFour_sum1"></td>
+                                <td>105 poäng är max </td>
+                            </tr>
+                            <tr>
+                                <td>BONUS (50)</td> 
+                                <td id = "playerOne_bonus"></td> 
+                                <td id = "playerTwo_bonus"></td>
+                                <td id = "playerThree_bonus"></td>
+                                <td id = "playerFour_bonus"></td>
+                                <td>Över 63p = 50 bonus</td>
+                            </tr>
+                            <tr>
+                                <td>Par</td> 
+                                <td id = "playerOne_pair" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_pair" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_pair" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_pair" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 = 12p</td>
+                            </tr>
+                            <tr>
+                                <td>Två par</td> 
+                                <td id = "playerOne_twoPair" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_twoPair" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_twoPair" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_twoPair" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 + 5 + 5 = 22p</td>
+                            </tr>
+                            <tr>
+                                <td>Triss</td> 
+                                <td id = "playerOne_triss"onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_triss" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_triss" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_triss" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 + 6 = 18p</td>
+                            </tr>
+                            <tr>
+                                <td>Fyrtal</td> 
+                                <td id = "playerOne_fyrtal" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_fyrtal" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_fyrtal" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_fyrtal" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 + 6 + 6 = 24p</td>
+                            </tr>
+                            <tr>
+                                <td>Kåk</td> 
+                                <td id = "playerOne_kak" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_kak" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_kak" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_kak" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 + 6 + 5 + 5 = 28p</td>
+                            </tr>
+                            <tr>
+                                <td>Liten stege</td> 
+                                <td id = "playerOne_ls"onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_ls" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_ls" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_ls" onclick = "addValue(this.id)"></td>
+                                <td>1,2,3,4,5 = 15p</td>
+                            </tr>
+                            <tr>
+                                <td>Stor stege</td> 
+                                <td id = "playerOne_ss" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_ss" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_ss" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_ss" onclick = "addValue(this.id)"></td>
+                                <td>2,3,4,5,6 = 30p</td>
+                            </tr>
+                            <tr>
+                                <td>Chans</td> 
+                                <td id = "playerOne_chance" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_chance" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_chance" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_chance" onclick = "addValue(this.id)"></td>
+                                <td>6 + 6 + 6 + 6 + 6 = 30p</td>
+                            </tr>
+                            <tr>
+                                <td>Yatzy (50)</td> 
+                                <td id = "playerOne_yatzy" onclick = "addValue(this.id)"></td> 
+                                <td id = "playerTwo_yatzy" onclick = "addValue(this.id)"></td>
+                                <td id = "playerThree_yatzy" onclick = "addValue(this.id)"></td>
+                                <td id = "playerFour_yatzy" onclick = "addValue(this.id)"></td>
+                                <td>x + x + x + x + x = 50p</td>
+                            </tr>
+                            <tr>
+                                <th>SUMMA:</th>
+                                <td id = "playerOne_sum2"></td> 
+                                <td id = "playerTwo_sum2"></td>
+                                <td id = "playerThree_sum2"></td>
+                                <td id = "playerThree_sum2"></td>
+                                <td>374p är max</td2>
+                            </tr>
+                        </table>
                     </div>
-                </form>
+                </div>
+                <div class = "column">
+                    <div class="form-container">
+                        <form>
+                            <!-- <label for="playerNames">Player names</label>
+                            <input type="text" id="playerNames" placeholder="Please enter each players name.">
+                            <button id = "addPlayer" type="button" onclick = "addPlayerNames()">Add player</button>
+                            <button id = "removePlayer" type="button" onclick = "removePlayerNames()">Remove player</button>
+                            <button id = "start" type = "button" onclick = "startGame()">Start game</button>
+                            <button id = "end" type = "button" onclick = "endGame()">End game</button> -->
+                            <div id = "header-container">
+                                <div class = "label-container">
+                                    <label class = "labelDices" for="diceOne">Dice 1</label>
+                                    <label class = "labelDices" for="diceTwo">Dice 2</label>
+                                    <label class = "labelDices" for="diceThree">Dice 3</label>
+                                    <label class = "labelDices" for="diceFour">Dice 4</label>
+                                    <label class = "labelDices" for="diceFive">Dice 5</label>
+                                </div>
+                                <div class = "dice-container">
+                                    <input id = "diceOne" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
+                                    <input id = "diceTwo" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
+                                    <input id = "diceThree" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
+                                    <input id = "diceFour" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
+                                    <input id = "diceFive" class = "dices" type="button" onclick = "saveDiceValue(this.id)" value = "X">
+                                </div>
+                                <div class = "calc-container">
+                                    <h1 id = "nrThrows" class = "userThrow">You have made: 0 throw </h1>
+                                     <button id = "throw" type = "button" onclick = "checkMaxThrow()">Throw</button>
+                                        <!-- <button id = "save" type = "button">Save values</button> -->
+                                </div>
+                                <!-- <h1 id = "playersTurn" class = "playerTurn">Current player: </h1> -->
+                            </div>
+                            <div class = "player-container">
+                                <div class = "player">
+                                        <img src="avatar.png" alt="Avatar" class="avatar-player">
+                                        <h1>Andreas</h1>
+                                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span>
+                                </div>
+                                <div class = "player">
+                                        <img src="avatar.png" alt="Avatar" class="avatar-player">
+                                        <h1>Oskar</h1>
+                                        <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, eligendi sint libero accusantium voluptas hic molestias quae sapiente quas incidunt molestiae.</span>
+                                </div>
+                                <div class = "player">
+                                        <img src="avatar.png" alt="Avatar" class="avatar-player">
+                                        <h1>Camilla</h1>
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam impedit exercitationem perspiciatis molestias.</span>
+                                </div>
+                                <div class = "player">
+                                        <img src="avatar.png" alt="Avatar" class="avatar-player">
+                                        <h1>Pettersson</h1>
+                                        <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-
+        <button class="open-button" onclick="openForm()">Chat room </button>
+        <div class="form-popup" id="myForm">
+        <form class="chat-container">
+            <div class = "chat-box">
+                <!-- <ul id = "allMsg"></ul> -->
+            </div>
+                <textarea id = "userMsg" class = "userMsg" type="text" placeholder="Type your message" name = "chat" required></textarea>
+            <div class = "button-container">
+                <button type="button" class="submitMsg" onclick="closeForm()">Close</button>
+                <button id="submitMsg" class = "submitMsg" type="button">Send</button>
+            </div>
+        </form>
+        </div>
         <script src="dices.js"></script>
     </body>
 </html>

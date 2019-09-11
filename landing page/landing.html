@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Play yatzy!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="styleL.css">
+        <script src="https://kit.fontawesome.com/fca6d7d29b.js"></script>
+    </head>
+    <body>
+       <div class="main-container">
+            <div class="jumbotron-container">
+                <h1 class = "main-h1">start your yatzy<br> journey now!</h1>
+                <img class = "dice-img "src = "dices.png">
+            </div>
+            <div class = "login-container">
+                <div class = "outer-container">
+                    <form class = "login-form">
+                        <h1 class = "sign-h1">Sign in</h1>
+                        <label class = "username" for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter your username">
+                        <label class = "password" for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <a href = "#" class = "forgotPassword">Forgot password?</a>
+                        <div class = "hr-sect">OR </div>
+                        <!-- Sociala medier här! -->
+                        <div class="social-media">
+                            <a class = "facebook" href = "#">Sign in with Facebook<i class="fab fa-facebook-square"></i></a>
+                            <a class = "google" href = "#">Sign in with Google<i class="fab fa-google-plus-square"></i></a>
+                        </div>
+                        <div class="bottom-container">
+                            <a href="#" class="button">Create account</a>
+                            <a href="#" class="loginButton">Log in</a>
+                        </div>
+                    </form>
+                    <form method = "POST" action = "" class = "register-form">
+                            <h1 class = "sign-h1">Create account</h1>
+                            <label class = "username" for="username">Username</label>
+                            <input type="text" id="username" placeholder="Enter your username">
+                            <label class = "password" for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                            <label class = "password" for="password">Repeat password</label>
+                            <input type="password" id="password" placeholder="Repeat your password" required>
+                            <label class = "email" for="email">Email</label>
+                            <input type="text" id="email" placeholder="Enter your email" required>
+                            <div id = "second" class="bottom-container">
+                                <a href="#" class="button">Back</a>
+                                <a href="#" class="button">Register</a>
+                            </div>
+                    </form>
+                </div>
+            </div>
+       </div>
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+        <script>
+        $('.button').click(function(){
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        });
+        </script>
+    </body>
+</html>

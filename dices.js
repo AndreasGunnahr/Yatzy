@@ -15,7 +15,9 @@ let startIndex = 0;
 let stash = 0;
 
 // TODO: Kolla om man kan lösa så man kan ha samma av flera namn. Problem när man tar bort ena (index).
-// TODO: Fixa Hide/show av tärningarna. 
+// TODO: Animera tärningarna på kast. 
+
+
 
 
 // Funktion där vi lägger till varje spelares namn i tabellen. 
@@ -433,9 +435,33 @@ function startGame(){
     document.getElementById("start").style.backgroundColor = "grey";
     document.getElementById("start").disabled = true;
     document.getElementById("playersTurn").innerHTML = "Current player: " + playerArray[playerIndex];
+    // document.getElementById("header-container").style.display = "block";
+}
+
+function openForm() {
+    document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+    document.getElementById("myForm").style.display = "none";
 }
 
 // Funktion där vi avslutar och börjar om matchen. 
 function endGame(){
     location.reload();
 }
+
+
+
+
+// Chatbox 
+let messages = document.getElementById("allMsg");
+let textbox = document.getElementById("userMsg");
+let submit = document.getElementById("submitMsg");
+
+submit.addEventListener("click", function(){
+    let newMessage = document.createElement("li");
+    newMessage.innerHTML = textbox.value;
+    messages.appendChild(newMessage);
+    textbox.value = "";
+}); 
