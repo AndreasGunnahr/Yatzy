@@ -23,21 +23,16 @@ body {
   display: flex;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  /* border: 1px solid #a2a2a2; */
   background-color: var(--main-bg-color);
   -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
-  /* -webkit-border-radius: 5px; */
-  /* -moz-border-radius: 5px; */
-  /* border-radius: 5px; */
 }
 
 .hero-image {
   display: flex;
   margin-right: 40px;
   text-align: center;
-  /* border: 3px solid blue; */
   font-family: var(--second-h1-font);
   color: var(--main-h1-color);
   font-size: 9px;
@@ -127,7 +122,7 @@ a {
 
 .page-wrapper {
   margin: 50px;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .row {
@@ -149,7 +144,7 @@ a {
 }
 
 .form-container {
-  background-color: green;
+  /* background-color: green; */
 }
 
 table {
@@ -160,13 +155,13 @@ table {
 th {
   text-align: left;
   font-weight: 900;
-  background-color: beige;
+  background-color: var(--main-h1-color);
   font-size: 16px;
 }
 
 td {
   font-size: 14x;
-  min-width: 40px;
+  min-width: 50px;
 }
 
 table,
@@ -273,7 +268,7 @@ button {
 }
 
 .calc-container {
-  border: 3px solid purple;
+  /* border: 3px solid purple; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -285,7 +280,7 @@ button {
   justify-content: space-between;
   text-align: center;
   font-family: var(--second-h1-font);
-  border: 3px solid black;
+  /* border: 3px solid black; */
 }
 .player-container .avatar-player {
   width: 50px;
@@ -299,7 +294,7 @@ button {
 }
 
 .player {
-  border: 3px solid black;
+  /* border: 3px solid black; */
   height: 250px;
   min-width: 150px;
 }
@@ -325,38 +320,19 @@ button {
   box-shadow: inset 400px 50px 0 0 #648767;
 }
 
-.form-container {
+/* .form-container {
   animation: 1s ease-out 0s 1 slideInFromLeft;
 }
 
 .table-container {
   animation: 1s ease-out 0s 1 slideInFromLeft;
-}
+} */
 
-/* . {
+/* .shakes{
   animation: shake 0.5s;
   When the animation is finished, start again
   animation-iteration-count: 1.5;
 } */
-
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInFromTop {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
 
 /* @keyframes shake {
     0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -372,6 +348,9 @@ button {
     100% { transform: translate(1px, -2px) rotate(-1deg); }
   } */
 
+
+
+/* ? Chat section - START  */
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
   background-color: #555;
@@ -411,16 +390,18 @@ button {
 .chat-box {
   height: 350px;
   background-color: white;
+  overflow-y: scroll;
 }
 
-#allMsg{
-    background-color: grey;
+#allMsg {
+    
 }
+
 
 /* Full-width input fields */
 .chat-container textarea[type="text"] {
-    padding: 10px;
-    background: white;
+  padding: 10px;
+  background: white;
 }
 
 .button-container {
@@ -444,3 +425,81 @@ button {
   margin: 2px 0px 0px 10px;
   background: green;
 }
+
+#allMsg{
+    padding: 10px 0px 10px 10px;
+    /* margin-top: 50px; */
+    /* margin-bottom: 20px; */
+}
+
+
+/* #myMsg{
+    display: none;
+} */
+
+.myUserInfo{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    font-family: var(--second-h1-font);
+}
+
+.otherUserInfo{
+    display:flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding: 5px;
+    margin-right: 5px;
+    font-family: var(--second-h1-font);
+}
+
+.time{
+    margin-left: 5px;
+    color: lightgrey;
+    font-size: 12px;
+}
+
+.time:last-child{
+    margin-right: 5px;
+}
+
+.chatUser{
+    font-size: 15px;
+}
+
+.speech-bubble{
+    padding: 30px;
+    margin-top: 5px;
+	position: relative;
+	background: #00aabb;
+    border-radius: .4em;
+    width: 80%;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	top: 10px;
+	left: 13%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-bottom-color: #00aabb;
+	border-top: 0;
+	margin-left: -20px;
+	margin-top: -20px;
+}
+
+
+.othersMsg-container .speech-bubble:last-child{
+    margin-left: 55px;
+}
+
+.othersMsg-container .speech-bubble:last-child:after{
+    left: 93%;
+}
+
+
+
+/* ? Chat section - END  */
