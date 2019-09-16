@@ -1,2 +1,2 @@
 # Yatzy
-Yatzy project
+

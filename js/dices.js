@@ -1,4 +1,3 @@
-
 let diceArray = ["diceOne","diceTwo","diceThree","diceFour","diceFive"];
 let tableSpots = ["playerOne","playerTwo","playerThree","playerFour"];
 let ls = ["","5","4","3","2","1"];

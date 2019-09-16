@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Rooms</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/css/styleR.css">
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="logo"><a href="#">IMAGE</a></h1>
+            <h1 class="yatzy">Rooms</h1>
+            <ul class="main-nav">
+                <div class = "hero-image">
+                    <li>
+                        <img src="/images/avatar.png" alt="Avatar" class="avatar">
+                        <h1>Welcome, </h1>
+                    </li>
+                </div>
+            </ul>
+        </header> 
+        <div class = "page-wrapper">
+            <div class = "row">
+                <div class = "column">
+                    <div class = "room-container">
+                        <div class = "header-container">
+                            <h1 class = "table-h1">Room name</h1>
+                            <h1 class = "table-h1 second">Number of players</h1>
+                        </div>
+                        <div class = "outer-container">
+                            <table id = "room-table">
+                                <tr>
+                                    <td>
+                                        Ella
+                                    </td>
+                                    <td>
+                                        1/4 players<button>Join</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Bryan
+                                    </td>
+                                    <td>
+                                        2/4 players<button>Join</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                       Andreas
+                                    </td>
+                                    <td>
+                                        3/4 players<button>Join</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Gunnahr
+                                    </td>
+                                    <td>
+                                        4/4 players<button>FULL</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class = "bottom-container">
+                            <div class="search-container">
+                                <!-- <label class = "searchLabel" for = "searchBar">Search for a room</label> -->
+                                <input id = "searchInput" class = "searchInput" placeholder="Search for a room"></input>
+                                <button id = "searchRoom" class = "searchButton">Search room</button>
+                            </div>
+                            <button  id = "addRoom" class = "addRoom">Create a new room</button>
+                            <button id = "deleteRoom" class = "deleteRoom">Delete room</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    
+        <script src="/js/rooms.js"></script>
+    </body>
+</html>
